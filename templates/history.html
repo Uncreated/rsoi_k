@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if global_error %}
+<span style="color: red;">[{{global_error}}]</span>
+{% endif %}
+<p>
+	{% if authorized %}
+		{% if prevId %}
+				<a href="{{ url_for('historyPage', page = prevId) }}">Preview</a>
+		{% endif %}
+		{% if nextId %}
+				<a href="{{ url_for('historyPage', page = nextId) }}">Next</a>
+		{% endif %}
+		<br>
+		{% if items %}
+			{% for item in items %}
+				<span style="color: black;">{{item.name}}</span>
+				<span style="color: black;">{{item.price}}р.</span>
+				<br>
+			{% endfor %}
+		{% else %}
+			<span style="color: red;">"None"</span>
+		{% endif %}
+	{% endif %}
+</p>
+
+{% endblock %}

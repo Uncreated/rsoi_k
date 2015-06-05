@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if global_error %}
+<span style="color: red;">[{{global_error}}]</span>
+{% endif %}
+
+<p>
+{% if item %}
+	<script type="text/javascript">
+		function itemAdd()
+		{
+			var request = new XMLHttpRequest();
+			request.onload = function()
+			{
+				//alert("onload!");
+				//need feedback for user
+			};
+			request.open("POST", "/itemAdd/" + {{ item.id }}, true);
+			request.send();
+		}
+	</script>
+	<span style="color: black;">{{item.name}}</span>
+	{% if item.price %}
+		<span style="color: black;">{{item.price}}р.</span>
+		{% if authorized %}
+			<input type="button" name="itemAddButton" onclick="itemAdd()" value="Add to cart">
+		{% else %}
+			<br><a href="{{ url_for('loginPage') }}">To purchase requires authorization</a>
+		{% endif %}
+	{% else %}
+		<span style="color: black;">No price</span>
+	{% endif %}
+	<br>
+	{% if item.params %}
+		<br>
+		{% for param in item.params %}
+			{% if param[0] and param[1] %}
+				<span style="color: black;">{{param[0]}}: {{param[1]}}</span><br>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+</p>
+
+{% endblock %}

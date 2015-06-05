@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>rsoi_k</title>
+  </head>
+  <body>
+		<div class=metanav>
+			<a href="{{ url_for('homePage') }}">Home</a>
+			<a href="{{ url_for('searchPage') }}">Search</a>
+			{% if authorized == True %}
+				<a href="{{ url_for('buyPage') }}">My cart</a>
+				<a href="{{ url_for('historyPage') }}">History</a>
+				<a href="{{ url_for('logoutPage') }}">Logout</a>
+			{% else %}
+				<a href="{{ url_for('loginPage') }}">Login</a>
+			{% endif %}
+		</div>
+	<hr>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+		{% for message in messages %}
+			<li><span style="color: red;">{{message}}</span></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+    {% endwith %}
+	{% block content %} {% endblock %}
+  </body>
+</html>

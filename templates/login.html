@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3> Please, enter your login data </h3>
+<form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+	{% if global_error %}
+	<span style="color: red;">[{{global_error}}]</span>
+	{% endif %}
+    <p>
+        Email:<br>
+        {{form.email(size=32)}}<br>
+		{% for error in form.errors.email %}
+        <span style="color: red;">[{{error}}]</span>
+		{% endfor %}
+    </p>
+    <p>
+        Password:<br>
+        {{form.password(size=32)}}<br>
+		{% for error in form.errors.password %}
+        <span style="color: red;">[{{error}}]</span>
+		{% endfor %}
+    </p>
+    <p><input type="submit" value="Login"></p>
+</form>
+
+{% endblock %}

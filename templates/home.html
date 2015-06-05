@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if message_to_user %}
+<h2> Message: </h2>
+<h3> {{ message_to_user }} </h3>
+{% else %}
+{% endif %}
+
+{% endblock %}

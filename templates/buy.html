@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if global_error %}
+<span style="color: red;">[{{global_error}}]</span>
+{% endif %}
+<p>
+	{% if authorized %}
+		{% if items %}
+			{% for item in items %}
+				<span style="color: black;">{{item.name}}</span>
+				<span style="color: black;">{{item.price}}р.</span>
+				<a href="{{ url_for('itemDelete', id=item.id) }}"> Remove</a>
+				<br>
+			{% endfor %}
+		{% if sum %}
+			<span style="color: black;">Sum: {{sum}}р.</span> 
+		{% endif %}
+		<a href="{{ url_for('payment') }}">Buy</a>
+		{% else %}
+			<span style="color: red;">"Empty cart"</span>
+		{% endif %}
+	{% endif %}
+</p>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="" method="post" name="search">
+    {{form.hidden_tag()}}
+	{% if global_error %}
+	<span style="color: red;">[{{global_error}}]</span>
+	{% endif %}
+    <p>
+        {{form.keyword(size=32)}}
+		<input type="submit" value="Search">
+		{% for error in form.errors.keyword %}
+        <span style="color: red;">[{{error}}]</span>
+		{% endfor %}
+	</p>
+    <p>
+		{% if request %}
+			{% if items %}
+				{% for item in items %}
+					<a href="{{ url_for('itemsPage', id=item.id) }}"> {{item.name}}</a>
+					{% if item.price %}
+						<span style="color: black;">{{item.price}}р.</span>
+					{% endif %}
+					<br>
+				{% endfor %}
+			{% else %}
+				<span style="color: red;">"Empty result"</span>
+			{% endif %}
+		{% endif %}
+    </p>
+</form>
+
+{% endblock %}
